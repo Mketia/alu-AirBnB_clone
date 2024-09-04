@@ -1,2 +1,2 @@
 # alu-AirBnB_clone
-AirBnB clone for wb development class
+AirBnB clone for web development class
