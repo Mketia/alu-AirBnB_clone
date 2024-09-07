@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         else:
-            cnew = self.classes[cname]
+            cnew = self.classes[cname]()
             cnew.save()
             print(cnew.id)
     
@@ -55,10 +55,81 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
                 return
             print(storage.all()[k])
-
+    
+    def do_destroy(self,cname):
+        """Deletes an instance based on the class name and id"""
+        args = cname.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        elif len(args) < 2:
+            print("** instance id missing **")
+            return
+        else:
+            k = f"{args[0]}.{args[1]}"
+            if k not in storage.all():
+                print("** no instance found **")
+                return
+            del storage.all(k)
+            storage.save()
+    
+    def do_all(self, cname):
+        """Prints all string representation of all instances or of a specific instance"""
         
+        args = cname.split()
+        d_list = []
+        d = storage.all()    
+        if len(args) == 0:
+            for v in d.values():
+                d_list.append(str(v))
+        else: 
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+                return
+            else:
+                for k, v in d.items():
+                    if k.startswith(args[0]):
+                        d_list.append(str(v))
+        print(d_list)
 
-
+    def do_update(self, cname):
+        """Updates an instance based on the class name and id by adding or updating attributes"""
+        args = cname.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if args[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        k = f"{args[0]}.{args[1]}"
+        if k not in storage.all():
+            print("** no instance found **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+        clas = storage.all()[k]
+        atrrname = args[2]
+        atrrvalue = args[3].strip('"')
+        try:
+            atrrvalue = int(atrrvalue)
+        except ValueError:
+            try:
+                atrrvalue = float(atrrvalue)
+            except ValueError:
+                atrrvalue = str(atrrvalue)
+        setattr(clas, atrrname, atrrvalue)
+        clas.save()
+            
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
