@@ -2,7 +2,6 @@
 """script for the base model"""
 
 import uuid
-from models import storage
 from datetime import datetime
 
 class BaseModel:
@@ -14,6 +13,7 @@ class BaseModel:
         *args: list of arguments
         **kwargs: dict of key-values arguments
         """
+        from models import storage
         if kwargs:
             for key in kwargs:
                 if key == "created_at":
@@ -37,6 +37,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
     
     def save(self):
+        from models import storage
         """Updates the attribute `updated_at` with the current datetime"""
         self.updated_at = datetime.now()
         storage.save()
