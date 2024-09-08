@@ -4,12 +4,26 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.user import User
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
 
     prompt ="hbnb"
-    classes = {'BaseModel': BaseModel}
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+    }
 
     def do_quit(self, arg):
         """command to exit the program"""
@@ -26,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self,cname):
         """Creates a new instance of a class, saves it, and prints the id"""
-        if len(cname) == 0:
+        if not cname:
             print("** class name missing **")
             return
         elif cname not in self.classes:
@@ -73,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             if k not in storage.all():
                 print("** no instance found **")
                 return
-            del storage.all(k)
+            del storage.all()[k]
             storage.save()
     
     def do_all(self, cname):
