@@ -6,5 +6,5 @@ from models.base_model import BaseModel
 class Review(BaseModel):
     """class dedicated to review objects"""
     place_id = ""
-    User_id = ""
+    user_id = ""
     text = ""
