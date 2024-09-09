@@ -8,7 +8,7 @@ from models.base_model import BaseModel
 class TestAmenity(unittest.TestCase):
     def setUp(self):
         """Set up an instance for testing"""
-        self.amenity = Amenity()  # Instantiate the Amenity class
+        self.amenity = Amenity()
 
     def test_inherits_baseModel(self):
         """Test if Amenity inherits from BaseModel"""
