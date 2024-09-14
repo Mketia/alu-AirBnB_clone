@@ -11,10 +11,11 @@ from models.place import Place
 from models.user import User
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
 
-    prompt ="hbnb "
+    prompt = "hbnb "
     classes = {
         "BaseModel": BaseModel,
         "User": User,
@@ -28,17 +29,17 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """command to exit the program"""
         return True
-    
-    def do_EOF(self,arg):
+
+    def do_EOF(self, arg):
         """handles EOF to exit the program"""
         print()
         return True
-    
+
     def emptyline(self):
         """Doesn't do anything on an empty line + ENTER """
         pass
 
-    def do_create(self,cname):
+    def do_create(self, cname):
         """Creates a new instance of a class, saves it, and prints the id"""
         if not cname:
             print("** class name missing **")
@@ -50,8 +51,8 @@ class HBNBCommand(cmd.Cmd):
             cnew = self.classes[cname]()
             cnew.save()
             print(cnew.id)
-    
-    def do_show(self,cname):
+
+    def do_show(self, cname):
         """Prints the string representation of an instance based on the class name and id"""
         args = cname.split()
         if len(args) == 0:
@@ -69,8 +70,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
                 return
             print(storage.all()[k])
-    
-    def do_destroy(self,cname):
+
+    def do_destroy(self, cname):
         """Deletes an instance based on the class name and id"""
         args = cname.split()
         if len(args) == 0:
@@ -89,17 +90,17 @@ class HBNBCommand(cmd.Cmd):
                 return
             del storage.all()[k]
             storage.save()
-    
+
     def do_all(self, cname):
         """Prints all string representation of all instances or of a specific instance"""
-        
+
         args = cname.split()
         d_list = []
-        d = storage.all()    
+        d = storage.all()
         if len(args) == 0:
             for v in d.values():
                 d_list.append(str(v))
-        else: 
+        else:
             if args[0] not in self.classes:
                 print("** class doesn't exist **")
                 return
@@ -143,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
                 atrrvalue = str(atrrvalue)
         setattr(clas, atrrname, atrrvalue)
         clas.save()
-            
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
