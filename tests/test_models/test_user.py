@@ -13,6 +13,9 @@ class TestUser(unittest.TestCase):
     def test_inherits_baseModel(self):
         """Test if user inherits from BaseModel"""
         self.assertTrue(issubclass(User, BaseModel))
+        self.assertTrue(hasattr(self.user, "id"))
+        self.assertTrue(hasattr(self.user, "created_at"))
+        self.assertTrue(hasattr(self.user, "updated_at"))
 
     def test_fname(self):
         """Test if attributes are set correctly"""
@@ -33,6 +36,17 @@ class TestUser(unittest.TestCase):
         """Test if attributes are set correctly"""
         self.assertTrue(hasattr(self.user, "last_name"))
         self.assertEqual(self.user.last_name, "")
+    
+    def test_to_dict(self):
+        """ test to_dict method """
+        new_dict = self.user.to_dict()
+        self.assertEqual(type(new_dict), dict)
+
+    def test_str(self):
+        """ test ___str___ method """
+        correct = "[User] ({}) {}".format(self.user.id, self.user.__dict__)
+        self.assertEqual(correct, str(self.user))
+
 
 if __name__ == "__main__":
     unittest.main()

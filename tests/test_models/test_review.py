@@ -13,6 +13,9 @@ class TestReview(unittest.TestCase):
     def test_inherits_baseModel(self):
         """Test if user inherits from BaseModel"""
         self.assertTrue(issubclass(Review, BaseModel))
+        self.assertTrue(hasattr(self.review, "id"))
+        self.assertTrue(hasattr(self.review, "created_at"))
+        self.assertTrue(hasattr(self.review, "updated_at"))
 
     def test_placeid(self):
         """ test place_id attribute """
@@ -28,6 +31,13 @@ class TestReview(unittest.TestCase):
         """ test user_id """
         self.assertTrue(hasattr(self.review, "user_id"))
         self.assertEqual(self.review.user_id, "")
+
+    def test_to_dict(self):
+        """test to_dict method"""
+        new_dict = self.review.to_dict()
+        self.assertEqual(type(new_dict), dict)
+
+
 
     
 
