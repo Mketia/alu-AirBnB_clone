@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""command module """
+"""Command module for the HBNB command interpreter"""
 
 import cmd
 from models import storage
@@ -13,39 +13,46 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter"""
+    """Command interpreter for the HBNB application"""
 
-
-<< << << < HEAD
-
-== == == =
->>>>>> > 0fb03c5e42d753f3848cd4767e99f55356b23149
- prompt = "hbnb "
-  classes = {
-       "BaseModel": BaseModel,
+    prompt = "hbnb "
+    classes = {
+        "BaseModel": BaseModel,
         "User": User,
         "Place": Place,
         "State": State,
         "City": City,
         "Amenity": Amenity,
         "Review": Review
-       }
+    }
 
-   def do_quit(self, arg):
-        """command to exit the program"""
+    def do_quit(self, arg):
+        """Exit the program
+
+        Usage:
+            quit
+        """
         return True
 
     def do_EOF(self, arg):
-        """handles EOF to exit the program"""
+        """Handle EOF to exit the program
+
+        Usage:
+            EOF
+        """
         print()
         return True
 
     def emptyline(self):
-        """Doesn't do anything on an empty line + ENTER """
+        """Do nothing on an empty line + ENTER"""
         pass
 
     def do_create(self, cname):
-        """Creates a new instance of a class, saves it, and prints the id"""
+        """Create a new instance of a class, save it, and print the id
+
+        Usage:
+            create <class name>
+        """
         if not cname:
             print("** class name missing **")
             return
@@ -58,7 +65,11 @@ class HBNBCommand(cmd.Cmd):
             print(cnew.id)
 
     def do_show(self, cname):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Print the string representation of an instance based on class name and id
+
+        Usage:
+            show <class name> <id>
+        """
         args = cname.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -77,7 +88,11 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()[k])
 
     def do_destroy(self, cname):
-        """Deletes an instance based on the class name and id"""
+        """Delete an instance based on class name and id
+
+        Usage:
+            destroy <class name> <id>
+        """
         args = cname.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -97,8 +112,11 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, cname):
-        """Prints all string representation of all instances or of a specific instance"""
+        """Print all string representations of all instances or of a specific class
 
+        Usage:
+            all [<class name>]
+        """
         args = cname.split()
         d_list = []
         d = storage.all()
@@ -116,7 +134,11 @@ class HBNBCommand(cmd.Cmd):
         print(d_list)
 
     def do_update(self, cname):
-        """Updates an instance based on the class name and id by adding or updating attributes"""
+        """Update an instance based on class name and id by adding or updating attributes
+
+        Usage:
+            update <class name> <id> <attribute name> <attribute value>
+        """
         args = cname.split()
         if len(args) == 0:
             print("** class name missing **")
