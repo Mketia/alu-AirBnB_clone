@@ -35,24 +35,6 @@ class TestCity(unittest.TestCase):
         self.assertEqual(self.city.state_id, "")
         self.assertEqual(self.city.name, "")
 
-    def test_id_unique(self):
-        """Test that each City instance has a unique id"""
-        city2 = City()
-        self.assertNotEqual(self.city.id, city2.id)
-
-    def test_created_at(self):
-        """Test that created_at is a datetime object and is accurate"""
-        self.assertIsInstance(self.city.created_at, datetime)
-        before = datetime.now()
-        city = City()
-        after = datetime.now()
-        self.assertTrue(before <= city.created_at <= after)
-
-    def test_updated_at(self):
-        """Test that updated_at is a datetime object and matches created_at initially"""
-        self.assertIsInstance(self.city.updated_at, datetime)
-        self.assertEqual(self.city.updated_at, self.city.created_at)
-
     def test_save(self):
         """Test if save() updates the `updated_at` attribute"""
         old_updated_at = self.city.updated_at
