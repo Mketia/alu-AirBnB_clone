@@ -15,22 +15,23 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0fb03c5e42d753f3848cd4767e99f55356b23149
-    prompt = "hbnb "
-    classes = {
-        "BaseModel": BaseModel,
+<< << << < HEAD
+
+== == == =
+>>>>>> > 0fb03c5e42d753f3848cd4767e99f55356b23149
+ prompt = "hbnb "
+  classes = {
+       "BaseModel": BaseModel,
         "User": User,
         "Place": Place,
         "State": State,
         "City": City,
         "Amenity": Amenity,
         "Review": Review
-    }
+       }
 
-    def do_quit(self, arg):
+   def do_quit(self, arg):
         """command to exit the program"""
         return True
 
