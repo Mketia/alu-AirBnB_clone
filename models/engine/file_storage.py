@@ -11,6 +11,7 @@ from models.user import User
 from models.review import Review
 import os
 
+
 class FileStorage:
     """class for serializing or deserializing a json file"""
 
@@ -19,7 +20,7 @@ class FileStorage:
 
     def classes(self):
         """Returns a dictionary of valid classes"""
-        return{
+        return {
             "BaseModel": BaseModel,
             "User": User,
             "Place": Place,
@@ -31,7 +32,7 @@ class FileStorage:
     def all(self):
         """returns the dictionary __objects"""
         return self.__objects
-    
+
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id.
 
@@ -39,8 +40,8 @@ class FileStorage:
         obj: The object to store
         """
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key]= obj
-    
+        self.__objects[key] = obj
+
     def save(self):
         """Serializes __objects to the JSON file."""
         newdict = {}
@@ -56,6 +57,3 @@ class FileStorage:
                 obj_dict = json.load(f)
                 for k, v in obj_dict.items():
                     self.__objects[k] = self.classes()[v["__class__"]](**v)
-
-
-
