@@ -12,7 +12,6 @@ The AirBnB Clone is a web-based project designed to replicate the functionality 
 - [Usage](#usage)
 - [Testing](#testing)
 - [File Structure](#file-structure)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
@@ -124,34 +123,6 @@ alu-AirBnB_clone/
 ├── console.py
 └── README.md
 ```
-
-## Contributing
-
-We welcome contributions to this project! If you would like to contribute, please follow these steps:
-
-1. **Fork the Repository**
-2. **Create a New Branch**
-
-   ```sh
-   git checkout -b feature/your-feature
-   ```
-
-3. **Make Changes and Commit**
-
-   ```sh
-   git add .
-   git commit -m "Add your message here"
-   ```
-
-4. **Push Changes**
-
-   ```sh
-   git push origin feature/your-feature
-   ```
-
-5. **Create a Pull Request**
-
-   Go to the repository on GitHub and open a pull request describing your changes.
 
 ## License
 
